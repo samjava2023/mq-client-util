@@ -1,4 +1,4 @@
-package com.db.pwmus.mqclient.spring;
+package com.db.pwmus.mqclient.sampleboot14;
 
 import com.db.pwmus.mqclient.api.MqMessage;
 import com.db.pwmus.mqclient.core.MqClient;
@@ -10,19 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Optional REST endpoints for quick testing (enabled via {@link EnableMqClient}).
- */
 @RestController
-public class MqRestController {
+public class MqController {
     private final MqClient mqClient;
 
-    public MqRestController(MqClient mqClient) {
+    public MqController(MqClient mqClient) {
         this.mqClient = mqClient;
     }
 
     @RequestMapping(value = "/mq/sendJson", method = RequestMethod.GET)
-    public String sendJsonGet(@RequestParam("queue") String logicalQueue, @RequestParam("body") String body) {
+    public String sendJson(@RequestParam("queue") String logicalQueue, @RequestParam("body") String body) {
         mqClient.sendJson(logicalQueue, body);
         return "OK";
     }

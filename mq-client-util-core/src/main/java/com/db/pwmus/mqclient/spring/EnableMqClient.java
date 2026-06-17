@@ -9,18 +9,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Enables MQ client beans, background listeners, and optional REST test endpoints.
+ * Enables MQ client beans and background listeners.
  * <p>
  * Add to your {@code @SpringBootApplication} class. Configure with
  * {@code mq.client.config-location=mq-config.json} in application.properties.
+ * REST endpoints are not included — add your own controller in the application.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import({
     MqClientSpringConfiguration.class,
-    MqListenerLifecycle.class,
-    MqRestController.class
+    MqListenerLifecycle.class
 })
 public @interface EnableMqClient {
 }
