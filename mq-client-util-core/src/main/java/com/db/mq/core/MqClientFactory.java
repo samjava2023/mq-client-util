@@ -23,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Spring-free factory. Consuming apps may wrap this in a Spring @Bean if desired.
@@ -32,6 +33,7 @@ public final class MqClientFactory implements Closeable {
 
     private final MqConfig config;
     private final Map<String, MqProvider> providersByType;
+    private final Map<String, MqSender> senderCache = new ConcurrentHashMap<String, MqSender>();
 
     private MqClientFactory(MqConfig config, Map<String, MqProvider> providersByType) {
         this.config = config;
@@ -110,6 +112,10 @@ public final class MqClientFactory implements Closeable {
     }
 
     public MqSender sender(String logicalQueueName) {
+        return senderCache.computeIfAbsent(logicalQueueName, this::createSender);
+    }
+
+    private MqSender createSender(String logicalQueueName) {
         MqFlowLog.enter(CLASS, "sender", "logicalQueue=" + logicalQueueName);
         QueueConfig queue = requireQueue(logicalQueueName);
         String connectionName = resolveConnectionName(queue.getConnection());

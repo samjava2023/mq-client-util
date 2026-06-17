@@ -29,6 +29,8 @@
     <!-- sample apps -->
     <spring-boot-26.version>2.6.5</spring-boot-26.version>
     <spring-boot-14.version>1.4.7.RELEASE</spring-boot-14.version>
+    <!-- optional Spring integration (provided; used by @EnableMqClient) -->
+    <spring.version>4.3.30.RELEASE</spring.version>
   </properties>
 
   <modules>
