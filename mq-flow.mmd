@@ -1,0 +1,46 @@
+sequenceDiagram
+autonumber
+participant App as Consuming App<br/>(Spring Boot 1.4 / 2.6.5)
+participant Ctrl as Web Controller<br/>(sample app)
+participant Factory as MqClientFactory<br/>com.db.pwmus.mqclient.core
+participant Cfg as mq-config.json<br/>(classpath)
+participant Reg as ServiceLoader Registry<br/>java.util.ServiceLoader
+participant Prov as IbmMqProvider<br/>com.db.pwmus.mqclient.ibmmq
+participant SApi as MqSender (API)<br/>com.db.pwmus.mqclient.api
+participant LApi as MqListener (API)<br/>com.db.pwmus.mqclient.api
+participant SImpl as MqSender (IBM Impl)<br/>com.db.pwmus.mqclient.ibmmq
+participant LImpl as MqListener (IBM Impl)<br/>com.db.pwmus.mqclient.ibmmq
+participant MQ as IBM MQ Queue Manager
+
+Note over App,Cfg: App owns mq-config.json and includes mq-client-util-core + mq-client-util-ibm-mq
+
+App->>Factory: fromClasspath("mq-config.json")
+Factory->>Cfg: read JSON config<br/>connections + queues
+Factory->>Reg: ServiceLoader.load(MqProvider)
+Reg-->>Factory: providersByType["IBM_MQ"] = IbmMqProvider
+
+%% SEND FLOW
+App->>Ctrl: GET /mq/sendJson?queue=requestQ&body=...
+Ctrl->>Factory: sender("requestQ")
+Factory->>Prov: createSender(connCfg, queueCfg)
+Prov-->>Factory: new com.db.pwmus.mqclient.ibmmq.MqSender
+Factory-->>Ctrl: SApi (backed by SImpl)
+Ctrl->>SApi: sendJson(body)
+SApi->>SImpl: sendJson(body)
+SImpl->>MQ: PUT message to REQUEST.Q<br/>+ contentType=application/json<br/>+ correlationId (optional)<br/>+ replyTo (optional)
+MQ-->>SImpl: ack/confirm
+SImpl-->>Ctrl: OK
+
+%% RECEIVE FLOW
+App->>Ctrl: GET /mq/receive?queue=responseQ&timeoutSec=5
+Ctrl->>Factory: listener("responseQ")
+Factory->>Prov: createListener(connCfg, queueCfg)
+Prov-->>Factory: new com.db.pwmus.mqclient.ibmmq.MqListener
+Factory-->>Ctrl: LApi (backed by LImpl)
+Ctrl->>LApi: receive(timeout)
+LApi->>LImpl: receive(timeout)
+LImpl->>MQ: GET message from RESPONSE.Q (blocking up to timeout)
+MQ-->>LImpl: message payload (JSON/XML)
+LImpl-->>Ctrl: MqMessage {body, contentType, headers}
+Ctrl-->>App: response body string
+

@@ -1,0 +1,25 @@
+{
+  "defaultConnection": "ibmVe",
+  "connections": {
+    "ibmVe": {
+      "type": "IBM_MQ",
+      "queueManager": "QM.SU000423",
+      "channel": "DBTAX.VE.SVRCONN",
+      "connectionName": "localhost(1423)",
+      "sslCipherSpec": "ECDHE_RSA_AES_256_GCM_SHA384",
+      "ssl": true,
+      "username": "app",
+      "password": "passw0rd",
+      "useMqCspAuthentication": false,
+      "connectionTimeoutMs": 30000
+    }
+  },
+  "queues": {
+    "responseQ": {
+      "connection": "ibmVe",
+      "qname": "PWM.VE.RESPONSE.QUEUE",
+      "queueType": "ibm.mq",
+      "defaultContentType": "XML"
+    }
+  }
+}

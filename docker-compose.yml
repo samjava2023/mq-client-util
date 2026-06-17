@@ -1,0 +1,20 @@
+services:
+  ibmmq:
+    image: icr.io/ibm-messaging/mq:9.3.5.1-r2
+    container_name: ibmmq-dev
+    environment:
+      LICENSE: accept
+      MQ_QMGR_NAME: QM.SU000423
+      MQ_ADMIN_PASSWORD: passw0rd
+      MQ_APP_PASSWORD: passw0rd
+      MQ_DEV: "true"
+    ports:
+      - "1423:1414"
+      - "9443:9443"
+    volumes:
+      - ./docker/mq-objects.mqsc:/etc/mqm/99-local-objects.mqsc:ro
+    healthcheck:
+      test: ["CMD", "chkmqready"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
