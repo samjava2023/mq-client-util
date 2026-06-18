@@ -12,7 +12,18 @@ if exist "%USERPROFILE%\.m2\repository\com\yourorg\mq" (
 )
 
 echo.
-echo Building all modules (v1.0.1-SNAPSHOT)...
+echo Building standalone mq-client-util-core library...
+pushd "%~dp0..\mq-client-util-core"
+call mvn clean install -DskipTests -U
+if errorlevel 1 (
+  echo Core library build failed.
+  popd
+  exit /b 1
+)
+popd
+
+echo.
+echo Building sample applications...
 call mvn clean install -DskipTests -U
 if errorlevel 1 (
   echo Build failed.

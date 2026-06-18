@@ -13,11 +13,12 @@ This guide shows how to add IBM MQ send/receive to any **Spring Boot 2.6.5** app
 
 ---
 
-## Step 1 — Install or publish the library
+## Step 1 — Build and install the library
 
-From the `mq-client-util` repository root:
+`mq-client-util-core` is a **standalone project** (sibling of this repo), not a Maven module here.
 
 ```cmd
+cd d:\project\AI\mq-client-util-core
 mvn clean install
 ```
 

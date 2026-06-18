@@ -37,10 +37,11 @@
       <artifactId>jackson-databind</artifactId>
     </dependency>
 
+    <!-- standalone library: build mq-client-util-core project first (mvn install) -->
     <dependency>
       <groupId>com.yourorg.mq</groupId>
       <artifactId>mq-client-util-core</artifactId>
-      <version>${project.version}</version>
+      <version>${mq-client-util-core.version}</version>
     </dependency>
   </dependencies>
 

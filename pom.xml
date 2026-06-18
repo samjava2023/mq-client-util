@@ -15,26 +15,12 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <!-- library deps (Java 8 compatible); consuming Boot apps will override via BOM -->
-    <jackson.version>2.9.10</jackson.version>
-    <slf4j.version>1.7.36</slf4j.version>
-
-    <!-- IBM MQ client (javax.jms / Java 8) -->
-    <ibm.mq.allclient.version>9.3.3.0</ibm.mq.allclient.version>
-
-    <!-- test -->
-    <junit.version>4.13.2</junit.version>
-    <mockito.version>2.28.2</mockito.version>
-
-    <!-- sample apps -->
     <spring-boot-26.version>2.6.5</spring-boot-26.version>
     <spring-boot-14.version>1.4.7.RELEASE</spring-boot-14.version>
-    <!-- optional Spring integration (provided; used by @EnableMqClient) -->
-    <spring.version>4.3.30.RELEASE</spring.version>
+    <mq-client-util-core.version>1.0.1-SNAPSHOT</mq-client-util-core.version>
   </properties>
 
   <modules>
-    <module>mq-client-util-core</module>
     <module>sample-boot26-webapp</module>
     <module>sample-boot14-webapp</module>
   </modules>
