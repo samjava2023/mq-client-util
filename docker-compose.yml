@@ -13,6 +13,7 @@ services:
       - "9443:9443"
     volumes:
       - ./docker/mq-objects.mqsc:/etc/mqm/99-local-objects.mqsc:ro
+      - ./docker/ssl:/mnt/mqm/ssl
     healthcheck:
       test: ["CMD", "chkmqready"]
       interval: 10s

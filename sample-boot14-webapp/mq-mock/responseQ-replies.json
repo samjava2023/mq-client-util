@@ -1,0 +1,80 @@
+{
+  "default": {
+    "contentType": "application/xml",
+    "headers": {
+      "EventType": "ACK",
+      "EventCategory": "ORDER",
+      "AckType": "UNKNOWN",
+      "ClientCode": "MOCK"
+    },
+    "body": "<AckResponse><AckType>UNKNOWN</AckType><Status>UNMATCHED</Status><Message>No rule matched request body</Message></AckResponse>"
+  },
+  "rules": [
+    {
+      "whenBodyContains": "<OrderId></OrderId>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "NACK",
+        "EventCategory": "ORDER",
+        "AckType": "NEGATIVE",
+        "ClientCode": "ORD"
+      },
+      "body": "<AckResponse><AckType>NEGATIVE</AckType><Status>REJECTED</Status><ReasonCode>MISSING_ORDER_ID</ReasonCode><Message>OrderId is required</Message></AckResponse>"
+    },
+    {
+      "whenBodyContains": "<Amount>-",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "NACK",
+        "EventCategory": "ORDER",
+        "AckType": "NEGATIVE",
+        "ClientCode": "ORD"
+      },
+      "body": "<AckResponse><AckType>NEGATIVE</AckType><Status>REJECTED</Status><ReasonCode>INVALID_AMOUNT</ReasonCode><Message>Amount must be positive</Message></AckResponse>"
+    },
+    {
+      "whenBodyContains": "<Action>REJECT</Action>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "NACK",
+        "EventCategory": "ORDER",
+        "AckType": "NEGATIVE",
+        "ClientCode": "ORD"
+      },
+      "body": "<AckResponse><AckType>NEGATIVE</AckType><Status>REJECTED</Status><ReasonCode>BUSINESS_REJECT</ReasonCode><Message>Order rejected by business rules</Message></AckResponse>"
+    },
+    {
+      "whenBodyContains": "<Action>CREATE</Action>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "ACK",
+        "EventCategory": "ORDER",
+        "AckType": "POSITIVE",
+        "ClientCode": "ORD"
+      },
+      "body": "<AckResponse><AckType>POSITIVE</AckType><Status>ACCEPTED</Status><Message>Order created successfully</Message></AckResponse>"
+    },
+    {
+      "whenBodyContains": "<Action>UPDATE</Action>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "ACK",
+        "EventCategory": "ORDER",
+        "AckType": "POSITIVE",
+        "ClientCode": "ORD"
+      },
+      "body": "<AckResponse><AckType>POSITIVE</AckType><Status>ACCEPTED</Status><Message>Order updated successfully</Message></AckResponse>"
+    },
+    {
+      "whenBodyContains": "<Action>CANCEL</Action>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "ACK",
+        "EventCategory": "ORDER",
+        "AckType": "POSITIVE",
+        "ClientCode": "ORD"
+      },
+      "body": "<AckResponse><AckType>POSITIVE</AckType><Status>ACCEPTED</Status><Message>Order cancelled successfully</Message></AckResponse>"
+    }
+  ]
+}

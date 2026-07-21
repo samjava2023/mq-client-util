@@ -31,17 +31,23 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- required at runtime by mq-client-util-core (jackson is provided in core) -->
+    <!-- Jackson required at runtime (provided scope in connector) -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
     </dependency>
 
-    <!-- standalone library: build mq-client-util-core project first (mvn install) -->
     <dependency>
       <groupId>com.yourorg.mq</groupId>
-      <artifactId>mq-client-util-core</artifactId>
-      <version>${mq-client-util-core.version}</version>
+      <artifactId>mq-connector-util</artifactId>
+      <version>${mq-connector-util.version}</version>
+    </dependency>
+
+    <!-- IBM MQ Spring Boot starter for Boot 2.6 -->
+    <dependency>
+      <groupId>com.ibm.mq</groupId>
+      <artifactId>mq-jms-spring-boot-starter</artifactId>
+      <version>2.6.5</version>
     </dependency>
   </dependencies>
 

@@ -1,7 +1,7 @@
 {
-  "defaultConnection": "ibmVeSsl",
+  "defaultConnection": "ibmVe",
   "connections": {
-    "ibmVeSsl": {
+    "ibmVe": {
       "type": "IBM_MQ",
       "queueManager": "QM.SU000423",
       "channel": "DBTAX.VE.SVRCONN",
@@ -10,16 +10,24 @@
       "sslCipherSpec": "ECDHE_RSA_AES_256_GCM_SHA384",
       "useIbmCipherMappings": false,
       "preferTls": true,
+      "username": "app",
+      "password": "passw0rd",
       "useMqCspAuthentication": false,
+      "sslTrustStore": "D:/project/AI/mq-client-util/docker/ssl/truststore.jks",
+      "sslTrustStorePassword": "changeit",
       "connectionTimeoutMs": 30000
     }
   },
   "queues": {
     "responseQ": {
-      "connection": "ibmVeSsl",
+      "connection": "ibmVe",
       "qname": "PWM.VE.RESPONSE.QUEUE",
       "queueType": "ibm.mq",
-      "defaultContentType": "XML"
+      "defaultContentType": "XML",
+      "listen": true
     }
   }
 }
+
+
+

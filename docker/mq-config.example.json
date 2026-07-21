@@ -11,6 +11,8 @@
       "username": "app",
       "password": "passw0rd",
       "useMqCspAuthentication": false,
+      "useIbmCipherMappings": false,
+      "preferTls": true,
       "connectionTimeoutMs": 30000
     }
   },

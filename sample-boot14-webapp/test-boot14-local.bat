@@ -23,8 +23,8 @@ echo.
 echo [2/4] Using local mq-config (ssl=false)...
 copy /Y docker\mq-config.local.json sample-boot14-webapp\src\main\resources\mq-config.json >nul
 
-echo [3/4] Building mq-client-util-core then sample app...
-pushd "%~dp0..\..\mq-client-util-core"
+echo [3/4] Building mq-connector-util then sample app...
+pushd "%~dp0..\..\mq-connector-util"
 call mvn clean install -DskipTests
 if errorlevel 1 (
   echo Core library build failed.

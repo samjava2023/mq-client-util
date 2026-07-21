@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderRequest>
+  <OrderId>ORD-1003</OrderId>
+  <Action>CANCEL</Action>
+  <ClientCode>ORD</ClientCode>
+</OrderRequest>

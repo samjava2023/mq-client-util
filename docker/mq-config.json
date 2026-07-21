@@ -8,6 +8,8 @@
       "connectionName": "localhost(1423)",
       "sslCipherSpec": "ECDHE_RSA_AES_256_GCM_SHA384",
       "ssl": true,
+      "useIbmCipherMappings": false,
+      "preferTls": true,
       "username": "app",
       "password": "passw0rd",
       "useMqCspAuthentication": false,

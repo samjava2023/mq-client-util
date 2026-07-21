@@ -1,0 +1,30 @@
+{
+  "mode": "mock",
+  "mock": {
+    "baseDir": "file:D:/project/AI/mq-client-util/sample-boot14-webapp/mq-mock",
+    "autoReply": true,
+    "autoReplyDelayMs": 3000,
+    "listenPollIntervalMs": 500
+  },
+  "defaultConnection": "localMock",
+  "connections": {
+    "localMock": { "type": "MOCK" }
+  },
+  "queues": {
+    "requestQ": {
+      "connection": "localMock",
+      "qname": "REQUEST.Q",
+      "mock": { "outboxFile": "requestQ-outbox.jsonl" }
+    },
+    "responseQ": {
+      "connection": "localMock",
+      "qname": "RESPONSE.Q",
+      "listen": true,
+      "mock": {
+        "inboxFile": "responseQ-inbox.jsonl",
+        "replyTemplateFile": "responseQ-replies.json",
+        "autoReplyFrom": "requestQ"
+      }
+    }
+  }
+}

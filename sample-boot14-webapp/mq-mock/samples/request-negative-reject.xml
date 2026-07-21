@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderRequest>
+  <OrderId>ORD-2001</OrderId>
+  <Action>REJECT</Action>
+  <ClientCode>ORD</ClientCode>
+  <Amount>99.00</Amount>
+  <Currency>USD</Currency>
+</OrderRequest>

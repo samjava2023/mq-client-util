@@ -11,6 +11,8 @@
       "username": "app",
       "password": "passw0rd",
       "useMqCspAuthentication": false,
+      "useIbmCipherMappings": false,
+      "preferTls": true,
       "sslTrustStore": "C:/path/to/truststore.jks",
       "sslTrustStorePassword": "changeit",
       "connectionTimeoutMs": 30000

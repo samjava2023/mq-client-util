@@ -12,8 +12,8 @@ if exist "%USERPROFILE%\.m2\repository\com\yourorg\mq" (
 )
 
 echo.
-echo Building standalone mq-client-util-core library...
-pushd "%~dp0..\mq-client-util-core"
+echo Building mq-connector-util library...
+pushd "%~dp0..\mq-connector-util"
 call mvn clean install -DskipTests -U
 if errorlevel 1 (
   echo Core library build failed.

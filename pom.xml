@@ -16,8 +16,8 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <spring-boot-26.version>2.6.5</spring-boot-26.version>
-    <spring-boot-14.version>1.4.7.RELEASE</spring-boot-14.version>
-    <mq-client-util-core.version>1.0.1-SNAPSHOT</mq-client-util-core.version>
+    <spring-boot-14.version>1.4.0.RELEASE</spring-boot-14.version>
+    <mq-connector-util.version>1.0.0-SNAPSHOT</mq-connector-util.version>
   </properties>
 
   <modules>
