@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Complex NEGATIVE sample — match key: MessageProfile=COMPLEX_NEG_COMPLIANCE -->
+<Envelope xmlns="urn:acme:mq:order:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Header>
+    <MessageId>MSG-2026-0727-00099155</MessageId>
+    <MessageProfile>COMPLEX_NEG_COMPLIANCE</MessageProfile>
+    <CorrelationId>CORR-NEG-C0MPL1ANC3</CorrelationId>
+    <Timestamp>2026-07-27T00:08:33.119Z</Timestamp>
+    <SourceSystem>ORD-INT-GATEWAY</SourceSystem>
+    <TargetSystem>PWM-VE-MQ</TargetSystem>
+    <SchemaVersion>3.2.1</SchemaVersion>
+    <Priority>HIGH</Priority>
+    <RetryCount>1</RetryCount>
+  </Header>
+  <Security>
+    <AuthMode>CERTIFICATE</AuthMode>
+    <ClientDn>CN=ord-client,OU=apps,O=ACME,C=US</ClientDn>
+    <SigningAlgorithm>SHA256withRSA</SigningAlgorithm>
+    <PayloadHash>bb11cc22dd33ee44ff556677889900aa</PayloadHash>
+  </Security>
+  <BusinessContext>
+    <TenantId>TENANT-US-EAST-01</TenantId>
+    <BusinessUnit>WEALTH-OPS</BusinessUnit>
+    <ProductCode>FX-SPOT-SETTLE</ProductCode>
+    <Region>EMEA</Region>
+    <LegalEntity>ACME Markets Ltd</LegalEntity>
+    <Book>FX-DESK-BOOK-B</Book>
+  </BusinessContext>
+  <OrderRequest>
+    <OrderId>ORD-CMPLX-20099155</OrderId>
+    <Action>CREATE</Action>
+    <OrderType>MARKET</OrderType>
+    <Side>SELL</Side>
+    <ClientCode>ORD</ClientCode>
+    <ExternalRef>EXT-REF-COMPL-FAIL-551</ExternalRef>
+    <TradeDate>2026-07-27</TradeDate>
+    <SettlementDate>2026-07-28</SettlementDate>
+    <Currency>EUR</Currency>
+    <GrossAmount>875000.00</GrossAmount>
+    <NetAmount>874200.00</NetAmount>
+    <Instrument>
+      <Isin>EU0009658145</Isin>
+      <Symbol>EURUSD</Symbol>
+      <Description>Euro / US Dollar Spot</Description>
+      <AssetClass>FX</AssetClass>
+      <Exchange>OTC</Exchange>
+    </Instrument>
+    <Quantity>
+      <Ordered>875000</Ordered>
+      <Unit>CCY</Unit>
+    </Quantity>
+    <Parties>
+      <Party role="ORDERING_CUSTOMER">
+        <PartyId>CUST-551902</PartyId>
+        <Name>Contoso Holdings GmbH</Name>
+        <Lei>529900T8BM49AURSDO55</Lei>
+        <Address>
+          <Line1>Friedrichstrasse 100</Line1>
+          <City>Berlin</City>
+          <PostalCode>10117</PostalCode>
+          <Country>DE</Country>
+        </Address>
+      </Party>
+      <Party role="BENEFICIAL_OWNER">
+        <PartyId>BO-7788</PartyId>
+        <Name>Restricted Counterparty Watchlist Entity</Name>
+        <WatchlistHit>true</WatchlistHit>
+      </Party>
+    </Parties>
+    <Compliance>
+      <KycStatus>EXPIRED</KycStatus>
+      <AmlScreening>FAIL</AmlScreening>
+      <SanctionsCheck>HIT_POTENTIAL</SanctionsCheck>
+      <Suitability>PENDING</Suitability>
+      <RiskRating>HIGH</RiskRating>
+      <Flags>
+        <Flag code="SANCTIONS_PARTIAL_MATCH" severity="CRITICAL"/>
+        <Flag code="KYC_DOCUMENTS_EXPIRED" severity="HIGH"/>
+        <Flag code="PEP_RELATED" severity="MEDIUM"/>
+      </Flags>
+      <Approvals>
+        <Approval level="L1" by="compliance.bot" at="2026-07-27T00:07:01Z" result="REJECTED"/>
+      </Approvals>
+    </Compliance>
+    <Extensions>
+      <Extension key="workflowId">WF-ORD-COMPL-99155</Extension>
+      <Extension key="notes">Complex compliance failure path for mock negative ACK</Extension>
+    </Extensions>
+  </OrderRequest>
+  <AuditTrail>
+    <Event seq="1" at="2026-07-27T00:06:50Z" actor="api-gateway" action="RECEIVED"/>
+    <Event seq="2" at="2026-07-27T00:07:01Z" actor="compliance-engine" action="SCREENED"/>
+    <Event seq="3" at="2026-07-27T00:08:33Z" actor="mq-publisher" action="READY_TO_SEND"/>
+  </AuditTrail>
+</Envelope>

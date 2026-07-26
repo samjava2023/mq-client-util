@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Expected NEGATIVE ACK for request-negative-complex-compliance.xml -->
+<AckEnvelope xmlns="urn:acme:mq:ack:v3">
+  <Header>
+    <MessageId>ACK-2026-0727-NEG-99155</MessageId>
+    <MessageProfile>COMPLEX_NEG_COMPLIANCE_ACK</MessageProfile>
+    <InReplyToMessageId>MSG-2026-0727-00099155</InReplyToMessageId>
+    <Timestamp>2026-07-27T00:08:36.000Z</Timestamp>
+    <SourceSystem>PWM-VE-MQ-MOCK</SourceSystem>
+  </Header>
+  <AckResponse>
+    <AckType>NEGATIVE</AckType>
+    <Status>REJECTED</Status>
+    <StatusCode>COMPL-4401</StatusCode>
+    <ReasonCode>COMPLIANCE_SCREENING_FAILED</ReasonCode>
+    <OrderId>ORD-CMPLX-20099155</OrderId>
+    <ExternalRef>EXT-REF-COMPL-FAIL-551</ExternalRef>
+    <RejectedAt>2026-07-27T00:08:36.000Z</RejectedAt>
+    <ProcessingNode>MOCK-NODE-COMPL</ProcessingNode>
+    <Failures>
+      <Failure code="AML_FAIL" severity="CRITICAL" description="AML screening returned FAIL"/>
+      <Failure code="SANCTIONS_HIT_POTENTIAL" severity="CRITICAL" description="Potential sanctions list match on beneficial owner"/>
+      <Failure code="KYC_EXPIRED" severity="HIGH" description="Customer KYC documents expired"/>
+    </Failures>
+    <Remediation>
+      <Step seq="1">Refresh KYC package for CUST-551902</Step>
+      <Step seq="2">Complete enhanced due diligence on beneficial owner BO-7788</Step>
+      <Step seq="3">Re-run sanctions screening and resubmit order</Step>
+    </Remediation>
+    <Message>Complex order rejected due to compliance screening failures</Message>
+  </AckResponse>
+</AckEnvelope>

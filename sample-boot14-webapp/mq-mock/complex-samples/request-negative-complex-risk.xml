@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Complex NEGATIVE sample — match key: MessageProfile=COMPLEX_NEG_RISK -->
+<Envelope xmlns="urn:acme:mq:order:v3">
+  <Header>
+    <MessageId>MSG-2026-0727-00110233</MessageId>
+    <MessageProfile>COMPLEX_NEG_RISK</MessageProfile>
+    <CorrelationId>CORR-NEG-R15K-LIMIT</CorrelationId>
+    <Timestamp>2026-07-27T00:12:01.900Z</Timestamp>
+    <SourceSystem>RISK-GATEWAY</SourceSystem>
+    <TargetSystem>PWM-VE-MQ</TargetSystem>
+    <SchemaVersion>3.2.1</SchemaVersion>
+    <Priority>URGENT</Priority>
+  </Header>
+  <BusinessContext>
+    <TenantId>TENANT-APAC-01</TenantId>
+    <BusinessUnit>DERIVATIVES</BusinessUnit>
+    <ProductCode>OPT-EQ-VANILLA</ProductCode>
+    <Region>APAC</Region>
+    <LegalEntity>ACME Asia Pte Ltd</LegalEntity>
+    <Book>OPTIONS-BOOK-C</Book>
+  </BusinessContext>
+  <OrderRequest>
+    <OrderId>ORD-CMPLX-30110233</OrderId>
+    <Action>CREATE</Action>
+    <OrderType>LIMIT</OrderType>
+    <Side>BUY</Side>
+    <ClientCode>ORD</ClientCode>
+    <ExternalRef>EXT-RISK-BREACH-233</ExternalRef>
+    <TradeDate>2026-07-27</TradeDate>
+    <SettlementDate>2026-07-30</SettlementDate>
+    <Currency>SGD</Currency>
+    <GrossAmount>5500000.00</GrossAmount>
+    <NetAmount>5492500.00</NetAmount>
+    <Instrument>
+      <Isin>US5949181045</Isin>
+      <Symbol>MSFT</Symbol>
+      <Description>Microsoft Corp — listed equity option underlying</Description>
+      <AssetClass>OPTION</AssetClass>
+      <OptionDetails>
+        <OptionType>CALL</OptionType>
+        <Strike>450.00</Strike>
+        <Expiry>2026-09-18</Expiry>
+        <Style>AMERICAN</Style>
+        <Multiplier>100</Multiplier>
+      </OptionDetails>
+    </Instrument>
+    <Quantity>
+      <Ordered>1200</Ordered>
+      <Unit>CONTRACT</Unit>
+    </Quantity>
+    <Risk>
+      <PreTradeCheck>FAIL</PreTradeCheck>
+      <VaRImpact>1250000.00</VaRImpact>
+      <LimitBreaches>
+        <Breach type="NOTIONAL" limit="3000000.00" actual="5500000.00"/>
+        <Breach type="CONCENTRATION" limit="15.00" actual="28.40" unit="PERCENT"/>
+        <Breach type="GREEKS_DELTA" limit="500000.00" actual="812000.00"/>
+      </LimitBreaches>
+      <Collateral>
+        <Required>2200000.00</Required>
+        <Available>950000.00</Available>
+        <Shortfall>1250000.00</Shortfall>
+      </Collateral>
+    </Risk>
+    <Parties>
+      <Party role="ORDERING_CUSTOMER">
+        <PartyId>CUST-APAC-909</PartyId>
+        <Name>Fabrikam Capital Asia</Name>
+      </Party>
+    </Parties>
+    <Extensions>
+      <Extension key="workflowId">WF-ORD-RISK-110233</Extension>
+      <Extension key="notes">Complex risk-limit breach for mock negative ACK</Extension>
+    </Extensions>
+  </OrderRequest>
+  <AuditTrail>
+    <Event seq="1" at="2026-07-27T00:11:40Z" actor="risk-engine" action="PRETRADE_CHECK"/>
+    <Event seq="2" at="2026-07-27T00:11:55Z" actor="risk-engine" action="LIMIT_BREACH"/>
+    <Event seq="3" at="2026-07-27T00:12:01Z" actor="mq-publisher" action="READY_TO_SEND"/>
+  </AuditTrail>
+</Envelope>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Expected NEGATIVE ACK for request-negative-complex-risk.xml -->
+<AckEnvelope xmlns="urn:acme:mq:ack:v3">
+  <Header>
+    <MessageId>ACK-2026-0727-NEG-110233</MessageId>
+    <MessageProfile>COMPLEX_NEG_RISK_ACK</MessageProfile>
+    <InReplyToMessageId>MSG-2026-0727-00110233</InReplyToMessageId>
+    <Timestamp>2026-07-27T00:12:04.000Z</Timestamp>
+    <SourceSystem>PWM-VE-MQ-MOCK</SourceSystem>
+  </Header>
+  <AckResponse>
+    <AckType>NEGATIVE</AckType>
+    <Status>REJECTED</Status>
+    <StatusCode>RISK-5502</StatusCode>
+    <ReasonCode>PRETRADE_RISK_LIMIT_BREACH</ReasonCode>
+    <OrderId>ORD-CMPLX-30110233</OrderId>
+    <ExternalRef>EXT-RISK-BREACH-233</ExternalRef>
+    <RejectedAt>2026-07-27T00:12:04.000Z</RejectedAt>
+    <ProcessingNode>MOCK-NODE-RISK</ProcessingNode>
+    <LimitBreaches>
+      <Breach type="NOTIONAL" limit="3000000.00" actual="5500000.00" currency="SGD"/>
+      <Breach type="CONCENTRATION" limit="15.00" actual="28.40" unit="PERCENT"/>
+      <Breach type="GREEKS_DELTA" limit="500000.00" actual="812000.00"/>
+    </LimitBreaches>
+    <Collateral>
+      <Required>2200000.00</Required>
+      <Available>950000.00</Available>
+      <Shortfall>1250000.00</Shortfall>
+    </Collateral>
+    <Message>Complex order rejected due to pre-trade risk limit breaches and collateral shortfall</Message>
+  </AckResponse>
+</AckEnvelope>

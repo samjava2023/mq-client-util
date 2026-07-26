@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Expected POSITIVE ACK for request-positive-complex-order.xml (auto-reply body) -->
+<AckEnvelope xmlns="urn:acme:mq:ack:v3">
+  <Header>
+    <MessageId>ACK-2026-0727-POS-88421</MessageId>
+    <MessageProfile>COMPLEX_POS_CREATE_ACK</MessageProfile>
+    <InReplyToMessageId>MSG-2026-0727-00088421</InReplyToMessageId>
+    <Timestamp>2026-07-27T00:05:14.000Z</Timestamp>
+    <SourceSystem>PWM-VE-MQ-MOCK</SourceSystem>
+  </Header>
+  <AckResponse>
+    <AckType>POSITIVE</AckType>
+    <Status>ACCEPTED</Status>
+    <StatusCode>0000</StatusCode>
+    <OrderId>ORD-CMPLX-10088421</OrderId>
+    <ExternalRef>EXT-REF-2026-Q3-99102</ExternalRef>
+    <AcceptedAt>2026-07-27T00:05:14.000Z</AcceptedAt>
+    <ProcessingNode>MOCK-NODE-01</ProcessingNode>
+    <Settlements>
+      <Settlement cycle="T+2" currency="USD" amount="1248750.25" status="SCHEDULED"/>
+    </Settlements>
+    <Validations>
+      <Validation name="SCHEMA" result="PASS"/>
+      <Validation name="KYC" result="PASS"/>
+      <Validation name="AML" result="PASS"/>
+      <Validation name="SANCTIONS" result="PASS"/>
+      <Validation name="CREDIT" result="PASS"/>
+    </Validations>
+    <Message>Complex order CREATE accepted by mock queue manager simulation</Message>
+    <Details>
+      <Detail key="instrument">US0378331005</Detail>
+      <Detail key="quantity">5000</Detail>
+      <Detail key="side">BUY</Detail>
+      <Detail key="workflowId">WF-ORD-CREATE-88421</Detail>
+    </Details>
+  </AckResponse>
+</AckEnvelope>

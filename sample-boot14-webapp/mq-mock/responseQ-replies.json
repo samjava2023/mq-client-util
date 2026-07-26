@@ -11,6 +11,41 @@
   },
   "rules": [
     {
+      "whenBodyContains": "<MessageProfile>COMPLEX_NEG_COMPLIANCE</MessageProfile>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "NACK",
+        "EventCategory": "ORDER",
+        "AckType": "NEGATIVE",
+        "ClientCode": "ORD",
+        "ReasonCode": "COMPLIANCE_SCREENING_FAILED"
+      },
+      "bodyFile": "complex-samples/expected-response-negative-compliance.xml"
+    },
+    {
+      "whenBodyContains": "<MessageProfile>COMPLEX_NEG_RISK</MessageProfile>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "NACK",
+        "EventCategory": "ORDER",
+        "AckType": "NEGATIVE",
+        "ClientCode": "ORD",
+        "ReasonCode": "PRETRADE_RISK_LIMIT_BREACH"
+      },
+      "bodyFile": "complex-samples/expected-response-negative-risk.xml"
+    },
+    {
+      "whenBodyContains": "<MessageProfile>COMPLEX_POS_CREATE</MessageProfile>",
+      "contentType": "application/xml",
+      "headers": {
+        "EventType": "ACK",
+        "EventCategory": "ORDER",
+        "AckType": "POSITIVE",
+        "ClientCode": "ORD"
+      },
+      "bodyFile": "complex-samples/expected-response-positive-complex.xml"
+    },
+    {
       "whenBodyContains": "<OrderId></OrderId>",
       "contentType": "application/xml",
       "headers": {

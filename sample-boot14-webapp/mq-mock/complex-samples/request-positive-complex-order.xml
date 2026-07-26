@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Complex POSITIVE sample — match key: MessageProfile=COMPLEX_POS_CREATE -->
+<Envelope xmlns="urn:acme:mq:order:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Header>
+    <MessageId>MSG-2026-0727-00088421</MessageId>
+    <MessageProfile>COMPLEX_POS_CREATE</MessageProfile>
+    <CorrelationId>CORR-POS-7F3A9C2E1B04</CorrelationId>
+    <Timestamp>2026-07-27T00:05:11.423Z</Timestamp>
+    <SourceSystem>ORD-INT-GATEWAY</SourceSystem>
+    <TargetSystem>PWM-VE-MQ</TargetSystem>
+    <SchemaVersion>3.2.1</SchemaVersion>
+    <Priority>NORMAL</Priority>
+    <RetryCount>0</RetryCount>
+    <Channel>DBTAX.VE.SVRCONN</Channel>
+  </Header>
+  <Security>
+    <AuthMode>CERTIFICATE</AuthMode>
+    <ClientDn>CN=ord-client,OU=apps,O=ACME,C=US</ClientDn>
+    <SigningAlgorithm>SHA256withRSA</SigningAlgorithm>
+    <PayloadHash>a9f3c1e8b2d04765fe91aa33cc88d012</PayloadHash>
+  </Security>
+  <BusinessContext>
+    <TenantId>TENANT-US-EAST-01</TenantId>
+    <BusinessUnit>WEALTH-OPS</BusinessUnit>
+    <ProductCode>EQ-CASH-SETTLE</ProductCode>
+    <Region>NA</Region>
+    <LegalEntity>ACME Securities LLC</LegalEntity>
+    <Book>PROP-TRADING-BOOK-A</Book>
+    <CostCenter>CC-48291</CostCenter>
+  </BusinessContext>
+  <OrderRequest>
+    <OrderId>ORD-CMPLX-10088421</OrderId>
+    <Action>CREATE</Action>
+    <OrderType>LIMIT</OrderType>
+    <Side>BUY</Side>
+    <ClientCode>ORD</ClientCode>
+    <ExternalRef>EXT-REF-2026-Q3-99102</ExternalRef>
+    <TradeDate>2026-07-27</TradeDate>
+    <SettlementDate>2026-07-29</SettlementDate>
+    <Currency>USD</Currency>
+    <GrossAmount>1250000.75</GrossAmount>
+    <NetAmount>1248750.25</NetAmount>
+    <Fees>
+      <Fee type="COMMISSION" amount="1200.00" currency="USD"/>
+      <Fee type="EXCHANGE" amount="45.50" currency="USD"/>
+      <Fee type="REGULATORY" amount="55.00" currency="USD"/>
+    </Fees>
+    <Instrument>
+      <Isin>US0378331005</Isin>
+      <Cusip>037833100</Cusip>
+      <Symbol>AAPL</Symbol>
+      <Description>Apple Inc Common Stock</Description>
+      <AssetClass>EQUITY</AssetClass>
+      <Exchange>NASDAQ</Exchange>
+      <CountryOfIssue>US</CountryOfIssue>
+    </Instrument>
+    <Quantity>
+      <Ordered>5000</Ordered>
+      <Unit>SHARE</Unit>
+      <LotSize>1</LotSize>
+    </Quantity>
+    <Pricing>
+      <LimitPrice>250.15</LimitPrice>
+      <Currency>USD</Currency>
+      <TimeInForce>GTC</TimeInForce>
+      <ExpireDate>2026-08-31</ExpireDate>
+    </Pricing>
+    <Parties>
+      <Party role="ORDERING_CUSTOMER">
+        <PartyId>CUST-889102</PartyId>
+        <Name>Northwind Family Office LP</Name>
+        <Lei>5493001KJTIIGC8Y1R12</Lei>
+        <Address>
+          <Line1>1200 Market Street</Line1>
+          <Line2>Suite 400</Line2>
+          <City>Philadelphia</City>
+          <State>PA</State>
+          <PostalCode>19107</PostalCode>
+          <Country>US</Country>
+        </Address>
+        <Contacts>
+          <Contact type="PRIMARY">
+            <Name>Jane Doe</Name>
+            <Email>jane.doe@northwind.example</Email>
+            <Phone>+1-215-555-0142</Phone>
+          </Contact>
+          <Contact type="OPS">
+            <Name>Ops Desk</Name>
+            <Email>ops@northwind.example</Email>
+            <Phone>+1-215-555-0199</Phone>
+          </Contact>
+        </Contacts>
+      </Party>
+      <Party role="EXECUTING_BROKER">
+        <PartyId>BRK-4410</PartyId>
+        <Name>ACME Brokerage Inc</Name>
+        <Lei>549300V6YFPLON8QH390</Lei>
+      </Party>
+      <Party role="CLEARING_MEMBER">
+        <PartyId>CLR-2201</PartyId>
+        <Name>ACME Clearing Corp</Name>
+      </Party>
+    </Parties>
+    <Allocations>
+      <Allocation account="ACC-77801" percent="40.00" quantity="2000"/>
+      <Allocation account="ACC-77802" percent="35.00" quantity="1750"/>
+      <Allocation account="ACC-77803" percent="25.00" quantity="1250"/>
+    </Allocations>
+    <Compliance>
+      <KycStatus>VERIFIED</KycStatus>
+      <AmlScreening>PASS</AmlScreening>
+      <SanctionsCheck>CLEAR</SanctionsCheck>
+      <Suitability>APPROVED</Suitability>
+      <RiskRating>MEDIUM</RiskRating>
+      <Approvals>
+        <Approval level="L1" by="trader.smith" at="2026-07-27T00:01:02Z" result="APPROVED"/>
+        <Approval level="L2" by="desk.head" at="2026-07-27T00:03:44Z" result="APPROVED"/>
+      </Approvals>
+    </Compliance>
+    <LineItems>
+      <LineItem id="1">
+        <Sku>EQ-AAPL-LOT</Sku>
+        <Narrative>Primary cash equity ticket</Narrative>
+        <Amount>1000000.00</Amount>
+      </LineItem>
+      <LineItem id="2">
+        <Sku>EQ-AAPL-LOT-ADD</Sku>
+        <Narrative>Top-up allocation</Narrative>
+        <Amount>250000.75</Amount>
+      </LineItem>
+    </LineItems>
+    <Attachments>
+      <Attachment name="term-sheet.pdf" mime="application/pdf" sizeBytes="245760" checksum="md5:91ab"/>
+      <Attachment name="client-instruction.xml" mime="application/xml" sizeBytes="8192" checksum="md5:33cd"/>
+    </Attachments>
+    <Extensions>
+      <Extension key="workflowId">WF-ORD-CREATE-88421</Extension>
+      <Extension key="slaClass">T+2</Extension>
+      <Extension key="darkPoolEligible">false</Extension>
+      <Extension key="notes">Complex multi-party create for mock MQ positive ACK testing</Extension>
+    </Extensions>
+  </OrderRequest>
+  <AuditTrail>
+    <Event seq="1" at="2026-07-27T00:00:01Z" actor="api-gateway" action="RECEIVED"/>
+    <Event seq="2" at="2026-07-27T00:00:02Z" actor="schema-validator" action="VALIDATED"/>
+    <Event seq="3" at="2026-07-27T00:00:05Z" actor="enrichment-svc" action="ENRICHED"/>
+    <Event seq="4" at="2026-07-27T00:05:11Z" actor="mq-publisher" action="READY_TO_SEND"/>
+  </AuditTrail>
+</Envelope>
